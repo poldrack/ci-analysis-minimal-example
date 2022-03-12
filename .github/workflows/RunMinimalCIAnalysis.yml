@@ -24,12 +24,24 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v2
+      - uses: conda-incubator/setup-miniconda@v2
         with:
+          activate-environment: test
+          environment-file: environment.yml
           python-version: 3.8
-      - name: Install dependencies
+          auto-activate-base: false
+      - shell: bash -l {0}
         run: |
-          # $CONDA is an environment variable pointing to the root of the miniconda directory
-          $CONDA/bin/conda env update --file environment.yml --name base
+          conda info
+          conda list
+      - name: Lint
+        shell: bash -l {0}
+        run: |
+            conda install flake8
+            python -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+            python -m flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      - name: Run pytest
+        shell: bash -l {0}
+        run: |
+            conda install pytest
+            pytest
