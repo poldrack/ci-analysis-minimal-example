@@ -1,0 +1,2 @@
+Likelihood ratio test results for arrest analysis:
+Chi-squared: 36.61593762358501, p = 0.0008431973954732763
