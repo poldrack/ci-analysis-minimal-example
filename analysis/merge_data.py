@@ -22,10 +22,11 @@ def merge_data(demogdata, taskdata, datadir):
     """
     merged_data = pd.merge(demogdata, taskdata, on='participant_id')
     merged_data.to_csv(os.path.join(datadir, 'alldata.csv'), index=False)
+    return(merged_data)
 
 
 if __name__ == "__main__":
     datadir = '../data'
     demogdata, taskdata = load_data(datadir)
-    merge_data(demogdata, taskdata, datadir)
+    _ = merge_data(demogdata, taskdata, datadir)
     print('Data merged and saved to data/alldata.csv')
