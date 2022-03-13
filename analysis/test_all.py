@@ -13,7 +13,7 @@ def test_merge():
 
 def test_analysis():
     datadir = 'data'
-    resultsdir= 'results'
+    resultsdir = 'results'
     alldata = load_alldata(datadir)
     arrestdata = select_variables(alldata)
 
@@ -21,5 +21,5 @@ def test_analysis():
 
     assert log_reg is not None
     assert log_reg_baseline is not None
-    
+
     save_output(log_reg, log_reg_baseline, resultsdir)
