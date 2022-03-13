@@ -45,3 +45,9 @@ jobs:
         run: |
             conda install pytest
             pytest
+      - name: Use the Upload Artifact GitHub Action
+        uses: actions/upload-artifact@v2
+        with: 
+          name: analysis_results
+          path: results
+
