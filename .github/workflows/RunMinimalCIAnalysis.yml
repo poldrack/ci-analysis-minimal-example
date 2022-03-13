@@ -30,18 +30,23 @@ jobs:
           environment-file: environment.yml
           python-version: 3.8
           auto-activate-base: false
-      - name: Lint
+      - name: Python code checking using flake8
         shell: bash -l {0}
         run: |
             conda install flake8
             python -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
             python -m flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: Run pytest
+      - name: Run analysis using pytest
         shell: bash -l {0}
         run: |
             conda install pytest
             pytest
-      - shell: bash -l {0}
+      - name: Render Jupyter notebook
+        shell: bash -l {0}
+        run: |
+            jupyter nbconvert analysis/ArrestAnalysis.ipynb --to html --output-dir results
+      - name: Save conda environment to file
+        shell: bash -l {0}
         run: |
           conda info
           conda list > results/conda_environment.txt
