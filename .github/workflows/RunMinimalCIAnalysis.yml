@@ -45,3 +45,10 @@ jobs:
         run: |
             conda install pytest
             pytest
+      - name: Upload data artifact
+        uses: actions/upload-artifact@v3
+        with: 
+          name: analysis_outputs
+          path: |
+            data/alldata.csv
+            results/
