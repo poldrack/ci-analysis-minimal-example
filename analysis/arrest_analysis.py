@@ -44,7 +44,7 @@ def select_variables(alldata, baseline_vars=None):
     # create binary arrest variable
     arrest_var = 'ArrestedChargedLifeCount'
     arrestdata = alldata[impulsivity_vars + baseline_vars + [arrest_var]]
-    arrestdata= arrestdata.assign(EverArrested = arrestdata.loc[:, arrest_var] > 0)
+    arrestdata = arrestdata.assign(EverArrested=arrestdata.loc[:, arrest_var] > 0)
     del arrestdata[arrest_var]
 
     return(arrestdata.dropna())
