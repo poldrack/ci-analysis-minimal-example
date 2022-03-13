@@ -45,9 +45,14 @@ jobs:
         run: |
             conda install pytest
             pytest
-      - name: Use the Upload Artifact GitHub Action
+      - name: Upload data artifact
         uses: actions/upload-artifact@v2
         with: 
           name: alldata
           path: data/alldata.csv
+      - name: Upload results artifact
+        uses: actions/upload-artifact@v2
+        with: 
+          name: results
+          path: results/
 
