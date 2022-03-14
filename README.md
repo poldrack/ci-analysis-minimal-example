@@ -1,4 +1,7 @@
 # ci-analysis-minimal-example
+
+![example workflow](https://github.com/poldrack/ci-analysis-minimal-example/actions/workflows/RunMinimalCIAnalysis.yml/badge.svg)
+
 A minimal example of a data analysis using continuous integration via Github actions
 
 ## Rationale
