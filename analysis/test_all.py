@@ -1,20 +1,22 @@
 # run functions for merge
 import os
+import pytest
 from merge_data import load_data, merge_data
 from arrest_analysis import model_arrest, load_alldata, select_variables, save_output
 
-
-def test_merge():
+@pytest.fixture
+def alldata():
     datadir = 'data'
     demogdata, taskdata = load_data(datadir)
-    merge_data(demogdata, taskdata, datadir)
-    assert os.path.exists(os.path.join(datadir, 'alldata.csv'))
+    alldata = merge_data(demogdata, taskdata, datadir)
+    return alldata
 
 
-def test_analysis():
-    datadir = 'data'
+def test_analysis(alldata):
     resultsdir = 'results'
-    alldata = load_alldata(datadir)
+    if not os.path.exists(resultsdir):
+        os.mkdir(resultsdir)
+    
     arrestdata = select_variables(alldata)
 
     log_reg, log_reg_baseline = model_arrest(arrestdata)
